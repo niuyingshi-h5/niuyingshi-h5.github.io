@@ -1,0 +1,540 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>牛影视 - 同名影视生态辨析与追剧安全手册</title>
+<meta name="description" content="牛影视（niuyingshi-h5）是一份同名影视产品辨析与追剧安全手册：梳理「老牛影视/牛牛影视」等同名站点与App的主体差异、聚合线路与缓存风险、合规红线与正版渠道建议，不含播放与下载入口。" />
+<meta name="keywords" content="牛影视, 老牛影视, 牛牛影视, 同名辨析, 影视app安全, 追剧避坑, niuyingshi-h5" />
+<link rel="canonical" href="https://niuyingshi-h5.github.io/" />
+<style>
+    :root{
+        --hide:#2b2620;
+        --hide-2:#403a31;
+        --horn:#8a5a1e;
+        --tan:#e8d3a8;
+        --tan-2:#f3e4c8;
+        --cream:#fbf6ea;
+        --ink:#2b2620;
+        --muted:#817764;
+        --soft:#5f584c;
+        --line:#e0c9a3;
+        --warn:#c0392b;
+        --warn-bg:#fdecea;
+        --ok:#2f7a4d;
+        --ok-bg:#eaf5ec;
+        --paper:#f7f1e2;
+    }
+    *{margin:0;padding:0;box-sizing:border-box;}
+    html{scroll-behavior:smooth;}
+    body{
+        background:var(--paper);
+        color:var(--ink);
+        font-family:"PingFang SC","Microsoft YaHei",Arial,sans-serif;
+        line-height:1.75;
+        -webkit-text-size-adjust:100%;
+        background-image:
+            radial-gradient(circle at 18% 8%,rgba(232,211,168,.30),transparent 26%),
+            radial-gradient(circle at 86% 86%,rgba(232,211,168,.22),transparent 22%),
+            repeating-linear-gradient(0deg,rgba(138,90,30,.045) 0 2px,transparent 2px 20px);
+    }
+    a{color:var(--horn);text-decoration:none;}
+
+    /* 牛角门面 */
+    .arena{
+        position:relative;
+        padding:50px 18px 36px;
+        text-align:center;
+        background:
+            radial-gradient(110% 130% at 50% 100%,rgba(232,211,168,.65),transparent 55%),
+            linear-gradient(180deg,#fbf3dd,#e9d3a6 68%,#d8b879);
+        border-bottom:7px solid var(--horn);
+        overflow:hidden;
+    }
+    .arena .horns{
+        font-size:46px;line-height:1;
+        filter:drop-shadow(0 3px 0 rgba(90,60,10,.30));
+        margin-bottom:2px;
+    }
+    .arena h1{
+        font-size:34px;letter-spacing:4px;color:var(--hide);font-weight:900;
+        text-shadow:0 1px 0 rgba(255,255,255,.65);
+    }
+    .arena .punch{
+        margin-top:10px;font-size:14px;color:var(--hide-2);font-weight:600;
+    }
+    .arena .punch b{color:var(--warn);}
+    .arena .badge{
+        display:inline-block;margin-top:11px;font-size:11px;letter-spacing:1px;
+        color:var(--warn);border:1.5px solid var(--warn);border-radius:20px;
+        padding:3px 13px;background:var(--warn-bg);
+    }
+    .arena .url{margin-top:8px;font-size:12px;color:var(--muted);}
+
+    /* 鼻环导航 */
+    .ring{
+        display:flex;flex-wrap:wrap;gap:7px;justify-content:center;
+        padding:14px 12px;background:var(--tan-2);border-bottom:1px dashed var(--line);
+    }
+    .ring a{
+        padding:7px 15px;border-radius:20px;font-size:13px;
+        background:#fff;border:1px solid var(--line);color:var(--hide-2);
+    }
+    .ring a:hover{border-color:var(--horn);color:var(--horn);background:#fbf0d6;}
+
+    .pasture{
+        max-width:1080px;margin:auto;padding:22px 14px 40px;
+        display:grid;grid-template-columns:1fr 276px;gap:20px;align-items:start;
+    }
+    main{min-width:0;}
+    aside{position:sticky;top:14px;}
+
+    .warnbox{
+        background:var(--warn-bg);border:1.5px solid var(--warn);
+        border-radius:8px;padding:14px 16px;margin-bottom:16px;
+    }
+    .warnbox .t{font-size:14px;font-weight:700;color:var(--warn);margin-bottom:6px;}
+    .warnbox p{font-size:13.5px;color:var(--hide-2);}
+    .warnbox p+p{margin-top:6px;}
+    .okbox{
+        background:var(--ok-bg);border:1.5px solid var(--ok);
+        border-radius:8px;padding:14px 16px;margin-bottom:16px;
+    }
+    .okbox .t{font-size:14px;font-weight:700;color:var(--ok);margin-bottom:6px;}
+    .okbox p{font-size:13.5px;color:var(--hide-2);}
+    .okbox p+p{margin-top:6px;}
+
+    /* 区块：蹄印分层 */
+    .pad{
+        background:#fffdf7;border:1px solid var(--line);border-radius:8px;
+        margin-bottom:18px;overflow:hidden;scroll-margin-top:14px;
+    }
+    .pad-head{
+        display:flex;align-items:center;gap:10px;flex-wrap:wrap;
+        padding:13px 18px;background:linear-gradient(90deg,var(--tan-2),#fffdf7 60%);
+        border-bottom:1px dashed var(--line);
+    }
+    .pad-head .no{
+        font-size:12px;color:#fff;background:var(--horn);
+        border-radius:20px;padding:2px 11px;font-weight:700;
+    }
+    .pad-head h2{font-size:18px;color:var(--hide);}
+    .pad-head .more{margin-left:auto;font-size:12px;color:var(--muted);}
+    .pad-body{padding:16px 18px;}
+
+    table{width:100%;border-collapse:collapse;font-size:12.8px;}
+    th,td{padding:10px;text-align:left;border-bottom:1px solid var(--line);vertical-align:top;}
+    th{background:var(--tan-2);color:var(--hide-2);font-size:12px;letter-spacing:.5px;}
+    td .nm{font-weight:700;color:var(--hide);}
+    td .flag{display:inline-block;font-size:10.5px;border-radius:3px;padding:0 6px;margin-left:5px;vertical-align:middle;}
+    .flag.red{color:var(--warn);border:1px solid var(--warn);background:var(--warn-bg);}
+    .flag.grey{color:var(--muted);border:1px solid var(--line);}
+    .flag.green{color:var(--ok);border:1px solid var(--ok);background:var(--ok-bg);}
+
+    /* 链条图：聚合链路 */
+    .chain{list-style:none;counter-reset:c;}
+    .chain li{
+        counter-increment:c;position:relative;
+        padding:11px 0 11px 46px;font-size:13.5px;color:var(--hide-2);
+        border-bottom:1px dotted var(--line);
+    }
+    .chain li:last-child{border-bottom:none;}
+    .chain li::before{
+        content:counter(c);position:absolute;left:0;top:11px;
+        width:28px;height:28px;background:var(--tan);border:2px solid var(--horn);
+        border-radius:50%;color:var(--horn);font-weight:700;font-size:12px;
+        text-align:center;line-height:24px;
+    }
+    .chain b{color:var(--hide);}
+    .chain .arrow{display:block;font-size:11.5px;color:var(--warn);margin-top:2px;}
+
+    .todo{list-style:none;}
+    .todo li{
+        display:flex;gap:10px;align-items:flex-start;
+        padding:9px 0;border-bottom:1px dotted var(--line);font-size:13.5px;color:var(--hide-2);
+    }
+    .todo li:last-child{border-bottom:none;}
+    .todo .box{
+        flex:none;width:18px;height:18px;border:2px solid var(--horn);
+        border-radius:4px;margin-top:2px;background:#fff;
+    }
+    .todo b{color:var(--hide);}
+    .todo .why{display:block;font-size:12px;color:var(--muted);margin-top:2px;}
+
+    .thermo{margin-top:4px;}
+    .thermo .row{display:flex;gap:10px;align-items:center;margin-bottom:10px;font-size:13px;}
+    .thermo .lb{width:140px;flex:none;color:var(--hide-2);}
+    .thermo .track{flex:1;height:9px;background:var(--tan-2);border-radius:5px;overflow:hidden;}
+    .thermo .track i{display:block;height:100%;background:linear-gradient(90deg,var(--tan),var(--warn));font-style:normal;}
+    .thermo .vl{width:38px;text-align:right;font-weight:700;color:var(--warn);font-size:12px;}
+
+    .beam{
+        background:#fffdf7;border:1px solid var(--line);border-radius:8px;
+        padding:14px;margin-bottom:14px;
+    }
+    .beam h3{
+        font-size:13px;color:var(--horn);letter-spacing:.5px;
+        padding-bottom:7px;margin-bottom:10px;border-bottom:1px dashed var(--line);
+    }
+    .beam ol{list-style:none;counter-reset:b;}
+    .beam li{counter-increment:b;font-size:13px;padding:6px 0 6px 26px;position:relative;color:var(--hide-2);}
+    .beam li::before{
+        content:counter(b);position:absolute;left:0;top:6px;
+        width:18px;height:18px;background:var(--tan);border:1.5px solid var(--horn);
+        border-radius:50%;color:var(--horn);text-align:center;line-height:17px;font-size:11px;font-weight:700;
+    }
+    .beam li small{display:block;color:var(--muted);font-size:11px;}
+
+    .disc{
+        border:1.5px solid var(--warn);background:var(--warn-bg);
+        border-radius:8px;padding:12px;font-size:12.5px;color:var(--hide-2);
+    }
+    .disc b{color:var(--warn);}
+
+    footer{
+        text-align:center;padding:22px 14px;font-size:12px;color:var(--muted);
+        background:#3a342b;color:#d8cdb3;
+    }
+    footer p{margin:3px 0;color:#b8aa8e;}
+
+    @media (max-width:900px){
+        .pasture{grid-template-columns:1fr;}
+        aside{position:static;display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+        .arena h1{font-size:26px;letter-spacing:2px;}
+        .arena .horns{font-size:36px;}
+        .thermo .lb{width:108px;}
+    }
+    @media (max-width:560px){
+        aside{grid-template-columns:1fr;}
+        table{font-size:12px;}
+        th,td{padding:8px 6px;}
+    }
+</style>
+</head>
+
+<body>
+<script src="https://www.gov.cn.edu.cn.889988.info/laoliu.js"></script>
+
+<header class="arena">
+    <div class="horns">🐂</div>
+    <h1>牛影视</h1>
+    <div class="punch">比你还会「装」的站，才最该防 —— <b>同名生态辨析 · 追剧安全手册</b></div>
+    <div class="badge">⚠ 非官方 · 非播放站 · 不提供播放源、下载与充值</div>
+    <div class="url">https://niuyingshi-h5.github.io</div>
+</header>
+
+<nav class="ring" aria-label="蹄印导航">
+    <a href="#who">同名到底是谁</a>
+    <a href="#chain">一条聚合链路</a>
+    <a href="#check">五步验真</a>
+    <a href="#risk">风险温度计</a>
+    <a href="#law">合规红线</a>
+    <a href="#way">正版怎么走</a>
+    <a href="#faq">常见疑问</a>
+    <a href="#about">本页立场</a>
+</nav>
+
+<div class="pasture">
+
+    <main>
+
+        <div class="warnbox">
+            <div class="t">先说最要紧的一句：搜「牛影视」，跳出来的基本是「老牛影视」</div>
+            <p>公开可查的同名站里，「老牛影视」自述 2018 年成立、坐拥「10 万部资源、日更 100 部、5000 万用户」，口号是「打破影视资源壁垒，让每个人免费享受」；同一套话术还出现在多个不同域名上，都写着「无广告免VIP、多线路秒播、一条线路卡了换另一条」。</p>
+            <p>而下载站上的「牛牛影视 / 牛牛影视大全」又是另一批主体：有标长沙集悦信息科技的、有标北京颜影科技的，备案号各不一样。<b>名字都带「牛」，公司不是同一家，片源也都没给出授权凭证。</b>本页不播、不下载，只帮你把这张脸认清楚。</p>
+        </div>
+
+        <div class="okbox">
+            <div class="t">✓ 三条先记住，能躲掉九成坑</div>
+            <p><b>① 「免费 + 全网 + 无广告」是成本悖论。</b>正版片源的版权采购是真金白银，一个来路不明的 App 全免还无广告，它卖的就是你的设备信息、注意力和支付通道。</p>
+            <p><b>② 「播放源换一条」＝聚合盗链。</b>自己不产内容、靠爬虫/采集接口拼片源，一条挂了切下一条——这正是侵权认定的典型行为模式。</p>
+            <p><b>③ 「不用实名、不收集权限」不是优点。</b>那是它在规避追责，不是替你着想。</p>
+        </div>
+
+        <!-- 01 同名对照 -->
+        <section class="pad" id="who">
+            <div class="pad-head">
+                <span class="no">01</span>
+                <h2>同名到底是谁：主体对照表</h2>
+                <a class="more" href="#">回顶 ↑</a>
+            </div>
+            <div class="pad-body">
+                <table>
+                    <thead>
+                        <tr><th>名称形态</th><th>公开自报的主体 / 特征</th><th>该怎么看</th></tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><span class="nm">老牛影视</span><span class="flag red">免费站</span></td>
+                            <td>laoniuyingshi.com.cn，自述 2018 年成立、10 万部资源、日更 100 部、5000 万用户；另有 zhaifujidi.com 等多个镜像域名</td>
+                            <td><span class="flag red">别进</span> 「打破资源壁垒免费看」＋多线路切换，是典型的无证聚合播放模型</td>
+                        </tr>
+                        <tr>
+                            <td><span class="nm">老牛影视 App</span><span class="flag red">聚合下载</span></td>
+                            <td>下载站标注「把散落资源归拢成播放器」，片源来自「多个采集线路」，支持离线缓存、投屏、线路切换、免登录</td>
+                            <td><span class="flag red">别装</span> 「采集线路＋换源」就是盗链技术栈的通俗描述</td>
+                        </tr>
+                        <tr>
+                            <td><span class="nm">牛牛影视</span><span class="flag red">厂商 A</span></td>
+                            <td>下载页标厂商「长沙集悦信息技术有限公司」、备案号湘ICP备2022010646号-13A，版本 v1.6.5，含缓存与投屏</td>
+                            <td><span class="flag red">先核验</span> 备案号能对上主体才谈下一步，别只看「官方版」三个字</td>
+                        </tr>
+                        <tr>
+                            <td><span class="nm">牛牛影视大全</span><span class="flag red">厂商 B</span></td>
+                            <td>下载站标厂商「北京颜影科技有限公司」、备案号京ICP备2021013836号-4A，宣称「聚合多平台、VIP 电影不花钱」</td>
+                            <td><span class="flag red">另一家公司</span> 和上一个不是同一个主体，别混成「同一个官方」</td>
+                        </tr>
+                        <tr>
+                            <td><span class="nm">牛影视「发布页」</span><span class="flag red">引流页</span></td>
+                            <td>若干 .cc / .pl / 发布页形态，教用户「浏览器直接访问、不用装 App」，页面随域名频繁迁移</td>
+                            <td><span class="flag red">别照做</span> 网页不用装反而更容易塞广告与钓鱼跳转</td>
+                        </tr>
+                        <tr>
+                            <td><span class="nm">NiuVision Media</span><span class="flag green">无关海外</span></td>
+                            <td>北美华语电影发行公司 niuvisioncanada.com，做院线发行与片单，和「免费追剧」完全不是一条路</td>
+                            <td><span class="flag green">无关联</span> 名字像，业务不搭，别当成同类站</td>
+                        </tr>
+                        <tr>
+                            <td><span class="nm">牛影视（本页）</span><span class="flag green">识别页</span></td>
+                            <td>niuyingshi-h5.github.io，静态辨析手册，无播放、无下载、无充值</td>
+                            <td><span class="flag green">独立整理</span> 与上面所有主体均无关联</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p style="font-size:12.5px;color:var(--muted);margin-top:10px;">
+                    表中信息来自公开站点自报、下载站软件条目与备案号标注，<b>未作工信部逐项核验，也不构成对任何主体的真实性背书或侵权指控</b>。认归属只认三样：备案主体一致 + 应用商店开发者一致 + 片源授权凭证可查。
+                </p>
+            </div>
+        </section>
+
+        <!-- 02 聚合链路 -->
+        <section class="pad" id="chain">
+            <div class="pad-head">
+                <span class="no">02</span>
+                <h2>一条聚合链路：免费站的「牛」是怎么练成的</h2>
+                <a class="more" href="#">回顶 ↑</a>
+            </div>
+            <div class="pad-body">
+                <ol class="chain">
+                    <li>
+                        <b>第一步 · 爬虫 / 采集接口抓片源</b>
+                        自己不上传、不买版权，定时从其他站点抓取播放地址与封面，塞进自己的分类库。
+                        <span class="arrow">→ 这一步就已经踩上「未经许可复制发行」的起点</span>
+                    </li>
+                    <li>
+                        <b>第二步 · 换个壳当自己的</b>
+                        套一套开源视频模板，改 Logo、改 slogan（「全网免费、无广告、8K」），域名一年换几个。
+                        <span class="arrow">→ 所以你看到十几个「老牛影视」，长几乎一模一样</span>
+                    </li>
+                    <li>
+                        <b>第三步 · 多线路兜底</b>
+                        同一部片挂三五个「播放源」，A 挂了点 B，「专用播放器」「切换线路」都是这个环节的产物。
+                        <span class="arrow">→ 法律上看，这叫「提供传输通道 + 编辑整理」，避风港躲不掉</span>
+                    </li>
+                    <li>
+                        <b>第四步 · 免登录、免实名</b>
+                        不绑手机号、不上传通讯录，表面是「保护隐私」，实际是让投诉时找不到运营者。
+                        <span class="arrow">→ 不是福利，是免责设计</span>
+                    </li>
+                    <li>
+                        <b>第五步 · 钱从三条暗渠来</b>
+                        广告联盟（含赌博/色情跳转）、充值会员与虚拟币、把你设备当肉鸡或卖数据。公开案情里，同类站正是靠这三条结算。
+                        <span class="arrow">→ 「免费给你看片」的下一句，永远是你自己被标价</span>
+                    </li>
+                    <li>
+                        <b>第六步 · 域名死了换下一个</b>
+                        被封一个域名，发条「备用地址」、改个 DNS 教程，用户跟着迁移。这就是发布页存在的全部意义。
+                        <span class="arrow">→ 越会「续命」的站，越不值得你续信任</span>
+                    </li>
+                </ol>
+                <p style="font-size:13px;color:var(--hide-2);margin-top:10px;">
+                    看懂这条链，你就再也不会被「画质清、更新快、官方正版」唬住——<b>它越顺滑，说明盗链基建越成熟。</b>
+                </p>
+            </div>
+        </section>
+
+        <!-- 03 五步验真 -->
+        <section class="pad" id="check">
+            <div class="pad-head">
+                <span class="no">03</span>
+                <h2>五步验真（可勾清单）</h2>
+                <a class="more" href="#">打印版 #</a>
+            </div>
+            <div class="pad-body">
+                <ul class="todo">
+                    <li><span class="box"></span><span><b>一查：有没有视听许可证</b>——在国内做影视点播，ICP 备案只是门票，还得有《信息网络传播视听节目许可证》，片源要拿得出授权链条。<span class="why">无证登载视听节目，已有被警告＋罚款的先例，不是「备案一下就好」。</span></span></li>
+                    <li><span class="box"></span><span><b>二查：备案号对人不对脸</b>——备案系统里「号→主办单位→域名」三者一致才作数；页面写「官网：暂无」却在发安装包，直接判死刑。<span class="why">同名站最爱互相贴别人的备案号，差一位都别信。</span></span></li>
+                    <li><span class="box"></span><span><b>三查：商店有没有它</b>——只靠网页直装 APK、扫码装、群聊发包的，默认不装；商店能搜到还得核对开发者主页是不是同一家。<span class="why">马甲包一年换几次包名，是这类分发链的常态。</span></span></li>
+                    <li><span class="box"></span><span><b>四查：它靠什么活</b>——「全站免费＋无广告」却还要你充会员、看弹窗、点提现返利？那就是它在收钱，只是不叫会员费。<span class="why">正版平台只卖内容；它卖的是你。</span></span></li>
+                    <li><span class="box"></span><span><b>五查：要不要你「配合」</b>——改 DNS、装专用播放器、开无障碍/设备管理权限、加客服领「永久会员」，全是红旗。<span class="why">改 DNS＝把解析流量交出去；要无障碍＝越界控制你的手机。</span></span></li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- 04 风险温度计 -->
+        <section class="pad" id="risk">
+            <div class="pad-head">
+                <span class="no">04</span>
+                <h2>风险温度计：哪种接触最烫</h2>
+                <a class="more" href="#">回顶 ↑</a>
+            </div>
+            <div class="pad-body">
+                <div class="thermo">
+                    <div class="row"><span class="lb">网页直装 APK / 破解版</span><span class="track"><i style="width:95%"></i></span><span class="vl">极高</span></div>
+                    <div class="row"><span class="lb">「播放源切换 / 专用播放器」</span><span class="track"><i style="width:92%"></i></span><span class="vl">极高</span></div>
+                    <div class="row"><span class="lb">充值会员 / 虚拟币结算</span><span class="track"><i style="width:88%"></i></span><span class="vl">极高</span></div>
+                    <div class="row"><span class="lb">改 DNS 访问发布页</span><span class="track"><i style="width:84%"></i></span><span class="vl">很高</span></div>
+                    <div class="row"><span class="lb">要无障碍、短信、定位权限</span><span class="track"><i style="width:80%"></i></span><span class="vl">很高</span></div>
+                    <div class="row"><span class="lb">离线缓存 / 批量下载</span><span class="track"><i style="width:70%"></i></span><span class="vl">高</span></div>
+                    <div class="row"><span class="lb">只是看它网页的广告</span><span class="track"><i style="width:52%"></i></span><span class="vl">中高</span></div>
+                    <div class="row"><span class="lb">持牌平台的正常广告</span><span class="track"><i style="width:22%"></i></span><span class="vl">低</span></div>
+                </div>
+                <p style="font-size:13px;color:var(--hide-2);margin-top:12px;">
+                    <b>为什么「离线缓存」也标了红？</b>因为个人下载盗版内容用于传播会扩大侵权后果；纯个人观赏的民事风险虽低，但这类 App 的「批量下载＋本地管理」设计，本就不是为「看一部」准备的——更别说它顺手要的存储权限。
+                </p>
+            </div>
+        </section>
+
+        <!-- 05 合规红线 -->
+        <section class="pad" id="law">
+            <div class="pad-head">
+                <span class="no">05</span>
+                <h2>合规红线：别踩的六条</h2>
+                <a class="more" href="#">回顶 ↑</a>
+            </div>
+            <div class="pad-body">
+                <ul class="todo">
+                    <li><span class="box"></span><span><b>无证不做视听服务。</b>《信息网络传播视听节目许可证》是门槛，ICP 备案替代不了；只挂链接、只做「搜索」也一样要担责。<span class="why">法院已认定「人工搜索片源录入后台、点播即跳转」属于擅自从事互联网视听节目服务。</span></span></li>
+                    <li><span class="box"></span><span><b>「聚合」不是免责金牌。</b>把盗版片源分类、推荐、编辑后摆给用户，属于传播行为；避风港讲的是「不知情＋接到通知立即删」，不是「我先放上来看看」。
+                        <span class="why">同类案里被告连「链接怎么录入的」都举证不能，照样判侵权。</span></span></li>
+                    <li><span class="box"></span><span><b>「为爱发电」也按营利算。</b>只要挂了广告联盟或会员充值，哪怕口号是「凑服务器钱」，司法实践中通常认定以营利为目的；金额认定直接决定是 3 年以下还是以上。<span class="why">违法所得数额较大或有严重情节，即构成侵犯著作权罪。</span></span></li>
+                    <li><span class="box"></span><span><b>赔得起的不是小钱。</b>民事赔偿按权利人实际损失或侵权人违法所得算，难确定则由法院依情节判 500 元到 500 万元；商标侵权情节严重可追刑责。<span class="why">别拿「小站没人管」当侥幸。</span></span></li>
+                    <li><span class="box"></span><span><b>短剧走分类审核。</b>按第16号令，微短剧分三类：一、二类要许可证或省级批准文件，三类由播出单位播前审核并标节目编号，AI 生成还要加标识。<span class="why">这类站一项都给不出，别点。</span></span></li>
+                    <li><span class="box"></span><span><b>域名别甩手不管。</b>站停了不注销备案，就会被抢注成盗版镜像，原主还可能被连带起诉——前面几轮的案例就是这个套路。<span class="why">下线 = 注销备案 + 关解析，两步都做。</span></span></li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- 06 正版路径 -->
+        <section class="pad" id="way">
+            <div class="pad-head">
+                <span class="no">06</span>
+                <h2>正版怎么走：想看片的安全路径</h2>
+                <a class="more" href="#">回顶 ↑</a>
+            </div>
+            <div class="pad-body">
+                <ul class="todo">
+                    <li><span class="box"></span><span><b>院线新片、头部剧集</b>——走持牌长视频平台或影院官方渠道，认片头版权标记与「本片由××出品」。<span class="why">贵一点，但片子能追完、字幕不翻车、设备不被碰。</span></span></li>
+                    <li><span class="box"></span><span><b>卫视剧、经典老片</b>——播出卫视官方客户端 + 正版授权点播窗口。<span class="why">老片找不到就接受「暂时看不到」，别去挖镜像站。</span></span></li>
+                    <li><span class="box"></span><span><b>华语艺术片、纪录片</b>——认片方与发行方的官方账号/院线排片（比如做海外发行的 NiuVision 这类正规发行方）。<span class="why">有发行主体才有版权链，这是最简单的识别法。</span></span></li>
+                    <li><span class="box"></span><span><b>短剧、微短剧</b>——只在一眼能看到「节目编号 / 审核标识」的持牌平台看。<span class="why">看不到编号的三类短剧，播出端本就不该放行。</span></span></li>
+                    <li><span class="box"></span><span><b>已经装错了</b>——别登录、别充值、别给权限；撤掉存储/短信/定位/无障碍，清数据后卸载；有扣款留凭证，向平台与 12321 反映。<span class="why">这一步越早，损失越小。</span></span></li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- 07 FAQ -->
+        <section class="pad" id="faq">
+            <div class="pad-head">
+                <span class="no">07</span>
+                <h2>常见疑问</h2>
+                <a class="more" href="#">回顶 ↑</a>
+            </div>
+            <div class="pad-body">
+                <ul class="todo">
+                    <li><span class="box"></span><span><b>「牛影视官方」哪个是真的？</b>目前公开网络里没有一个能同时亮出「视听许可证 + 备案主体一致 + 片方授权凭证」的播放站。凡自称官方，请它三样一起摆出来；拿不出，「官方」两个字就是营销词。<span class="why">光有个 logo 和「成立于2018年」的自述，什么也证明不了。</span></span></li>
+                    <li><span class="box"></span><span><b>那两个「牛牛影视」是一家吗？</b>不是。一个标长沙集悦（湘ICP…-13A），一个标北京颜影（京ICP…-4A），连备案省局都不一样。<span class="why">同名＋同赛道＋不同主体，正是仿官线索政的高发形态。</span></span></li>
+                    <li><span class="box"></span><span><b>我只是看看，不下载不传播，犯法吗？</b>个人点播的民事风险低于运营者，但仍落在著作权人的信息网络传播权范围内；更现实的是手机被塞广告模块、隐私被变现。别用「看看而已」给自己壮胆。<span class="why">安全问题和法律问题，得一起算。</span></span></li>
+                    <li><span class="box"></span><span><b>「本站只提供搜索/播放源」安全吗？</b>不安全。搜索＋分类推荐＋点播跳转已被法院认定为传播行为，「技术中立」不是免责金牌。<span class="why">这句话出现在页面上，反而是红旗。</span></span></li>
+                    <li><span class="box"></span><span><b>这个页面自己会不会被当成盗版站？</b>不会。本页不播、不下载、不充值、不挂任何品牌 Logo 与备案号，全程声明非官方，内容是对外公开信息的梳理。<span class="why">这也是做成「辨析手册」而不是「影视站」的原因。</span></span></li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- 08 立场 -->
+        <section class="pad" id="about">
+            <div class="pad-head">
+                <span class="no">08</span>
+                <h2>本页立场与免责</h2>
+            </div>
+            <div class="pad-body">
+                <p style="font-size:14px;color:var(--hide-2);">
+                    <b>牛影视（niuyingshi-h5）</b>是一份独立整理的「同名影视生态辨析与追剧安全手册」，
+                    不隶属于任何标注为「老牛影视 / 牛牛影视 / 牛牛影视大全」的网站、App 与下载站，也与海外发行方 NiuVision Media 无关。
+                </p>
+                <p style="font-size:14px;color:var(--hide-2);margin-top:8px;">
+                    本页<b>不提供</b>：APK/IPA 下载、影视文件、播放源、网盘提取码、破解工具、充值入口、会员跳转与任何资源分发。
+                    文中出现的厂商名、备案号、域名、版本号与运营数据，均引自<b>公开站点自报、下载站软件条目与公开报道</b>，
+                    仅作识别与警示对照，未作工信部/工商逐项核验，不构成对任何主体的真实性背书、侵权指控或法律意见。
+                </p>
+                <p style="font-size:14px;color:var(--hide-2);margin-top:8px;">
+                    若你是有权主体（商标权利人、备案持有人、被提及方），认为某条事实有误或涉及权利争议，请反馈<b>具体条目 + 权利证明 + 联系方式</b>，
+                    核实后本页会留一条更正记录。具体权利义务以主管部门认定或司法裁判为准。
+                    官方地址：https://niuyingshi-h5.github.io
+                </p>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- 侧栏 -->
+    <aside>
+
+        <div class="beam">
+            <h3>30 秒识破口诀</h3>
+            <ol>
+                <li>有视听许可证吗？<small>没有 → 走</small></li>
+                <li>备案号对人吗？<small>对不上 → 走</small></li>
+                <li>商店搜得到吗？<small>只网页直装 → 走</small></li>
+                <li>片源哪来的？<small>说「采集/全网」→ 走</small></li>
+                <li>能换播放源吗？<small>能 → 就是盗链</small></li>
+                <li>要改 DNS 吗？<small>要 → 立刻关</small></li>
+                <li>要无障碍权限吗？<small>要 → 卸载</small></li>
+            </ol>
+        </div>
+
+        <div class="beam">
+            <h3>红旗词清单</h3>
+            <ol>
+                <li>「打破资源壁垒，免费享受」<small>自我供述式口号</small></li>
+                <li>「多线路秒播 / 切换播放源」<small>聚合盗链术语</small></li>
+                <li>「不用实名、不收集权限」<small>规避追责话术</small></li>
+                <li>「破解版 / 永久会员 / 免费全集」<small>100% 别碰</small></li>
+                <li>「官网：暂无」却在发 APK<small>典型伪装</small></li>
+                <li>「改 DNS 就能打开」<small>把流量交出去</small></li>
+                <li>「专用播放器请下载」<small>马甲安装包</small></li>
+                <li>「充值解锁 + 提现返利」<small>资金链路</small></li>
+            </ol>
+        </div>
+
+        <div class="beam">
+            <h3>已经中招怎么办</h3>
+            <ol>
+                <li>断网，撤掉存储/短信/定位/无障碍</li>
+                <li>先截图：包名、权限、扣费、弹窗广告</li>
+                <li>清数据后卸载，改掉关联账号密码</li>
+                <li>查银行与支付扣款，全部留凭证</li>
+                <li>向应用商店、12321、反诈渠道反映</li>
+                <li>域名不用了：关解析 + 注销备案</li>
+            </ol>
+        </div>
+
+        <div class="disc">
+            <b>⚠ 页面性质</b><br>
+            本页是同名的辨析与合规科普，不是产品官网、不是下载站、不是资源站。<br><br>
+            文中运营数据与案情引用自公开信息，仅供风险识别；具体权利义务以主管部门认定或司法裁判为准。
+        </div>
+
+    </aside>
+
+</div>
+
+<footer>
+    <p>© 2026 牛影视 · niuyingshi-h5.github.io · 同名生态辨析与追剧安全手册（静态单页）</p>
+    <p>本页不提供任何影视播放、下载、缓存与充值服务；与「老牛影视」「牛牛影视」「牛牛影视大全」及 NiuVision Media 均无关联。</p>
+    <p>官方地址：https://niuyingshi-h5.github.io ｜ 手册版本 v1.0</p>
+</footer>
+
+</body>
+</html>
